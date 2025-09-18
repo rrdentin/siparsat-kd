@@ -1,10 +1,27 @@
-<div class="flex items-center gap-x-2">
+
+<div class="logo-container">
     <img
-        src="{{ asset('assets/logo_polinema.png') }}"
+        src="{{ asset('assets/Logo Kab malang.png') }}"
         alt="Polinema Logo"
-        class="h-8 w-8"
-    style="height: 32px !important; width: auto !important"/>
-     <span class="font-bold">
-        {{-- {{ config('app.name') }} --}}
-    </span>
+    />
+    <span>        {{ config('app.name') }}
+</span>
 </div>
+
+<style>
+    .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-container img {
+    height: 32px;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.logo-container span {
+    font-weight: bold;
+}
+</style>

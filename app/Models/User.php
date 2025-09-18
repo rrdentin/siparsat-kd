@@ -57,7 +57,7 @@ class User extends Authenticatable implements FilamentUser
     protected static function booted()
     {
         static::deleting(function ($user) {
-            if ($user->id === 1 || $user->hasRole('super-admin')) {
+            if ($user->id === 1) {
                 throw new \Illuminate\Database\Eloquent\ModelNotFoundException('This user cannot be deleted.');
             }
         });

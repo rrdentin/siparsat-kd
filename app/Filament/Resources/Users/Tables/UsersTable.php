@@ -48,7 +48,7 @@ class UsersTable
                     ->modalDescription('Apakah Anda yakin ingin menghapus pengguna ini?')
                     ->modalSubmitActionLabel('Hapus')
                     ->modalCancelActionLabel('Batal')
-                        ->visible(fn($record) => ! ($record->id === 1 || $record->hasRole('super-admin')))
+                        ->visible(fn($record) => ! ($record->id === 1))
 ,
             ])
             ->toolbarActions([
