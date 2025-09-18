@@ -14,7 +14,7 @@ class ArsipSuratWidget extends StatsOverviewWidget
             Stat::make('Arsip Surat', ArsipSurat::count())
                 ->description('Arsip Surat yang terdapat pada sistem')
                 ->descriptionIcon('heroicon-m-clipboard-document-list', IconPosition::Before)
-                ->chart([20, 7, 15, 10, 20, 60])
+                ->chart([30, 7, 15, 40, 20, 60])
                 ->color('success')
                 ->url(route('filament.admin.resources.arsip-surat.index')),
             Stat::make('Kategori Surat', ArsipSurat::count())
@@ -27,7 +27,7 @@ class ArsipSuratWidget extends StatsOverviewWidget
             Stat::make('Pengguna', ArsipSurat::count())
                 ->description('Pengguna yang terdapat pada sistem')
                 ->descriptionIcon('heroicon-m-users', IconPosition::Before)
-                ->chart([20, 7, 15, 10, 20, 60])
+                ->chart([20, 45, 15, 90, 20, 60])
                 ->color('info')
                             ->url(route('filament.admin.resources.manajemen-pengguna.index')),
 

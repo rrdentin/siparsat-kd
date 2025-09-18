@@ -27,70 +27,72 @@ class TrenArsipSuratDashboard extends ChartWidget
 
     // Get chart data based on created_at field (grouped by month or day)
     protected function getData(): array
-    {
-        // Determine date range and granularity depending on the selected filter
-        $now = Carbon::now();
-        switch ($this->filter) {
-            case 'today':
-                $start = $now->copy()->startOfDay();
-                $end   = $now->copy()->endOfDay();
-                $granularity = 'perDay';
-                break;
+{
+    $now = Carbon::now();
+    switch ($this->filter) {
+        case 'today':
+            $start = $now->copy()->startOfDay();
+            $end   = $now->copy()->endOfDay();
+            $granularity = 'perDay';
+            break;
 
-            case 'week':
-                // Last 7 days including today
-                $start = $now->copy()->subDays(6)->startOfDay();
-                $end   = $now->copy()->endOfDay();
-                $granularity = 'perDay';
-                break;
+        case 'week':
+            $start = $now->copy()->subDays(6)->startOfDay();
+            $end   = $now->copy()->endOfDay();
+            $granularity = 'perDay';
+            break;
 
-            case 'month':
-                // Last 30 days (you can change to startOfMonth if you prefer calendar month)
-                $start = $now->copy()->subDays(29)->startOfDay();
-                $end   = $now->copy()->endOfDay();
-                $granularity = 'perDay';
-                break;
+        case 'month':
+            $start = $now->copy()->subDays(29)->startOfDay();
+            $end   = $now->copy()->endOfDay();
+            $granularity = 'perDay';
+            break;
 
-            case 'year':
-            default:
-                // This year (calendar year)
-                $start = $now->copy()->startOfYear();
-                $end   = $now->copy()->endOfYear();
-                $granularity = 'perMonth';
-                break;
-        }
-
-        // Build Trend query and apply chosen granularity dynamically
-        $trend = Trend::model(ArsipSurat::class)
-            ->between(start: $start, end: $end);
-
-        // Call the appropriate granularity method
-        if ($granularity === 'perMonth') {
-            $trend = $trend->perMonth();
-        } else { // perDay
-            $trend = $trend->perDay();
-        }
-
-        $data = $trend->count();
-
-        // Ensure we return plain arrays for labels & data
-        $values = $data->map(fn(TrendValue $value) => $value->aggregate)->toArray();
-        $labels = $data->map(fn(TrendValue $value) => $value->date)->toArray();
-
-        return [
-            'datasets' => [
-                [
-                    'data' => $values,
-                    'label' => 'Arsip Surat Count',
-                    'borderColor' => '#3490dc',
-                    'backgroundColor' => 'rgba(52, 144, 220, 0.1)',
-                    'fill' => true,
-                    'tension' => 0.3,
-                ],
-            ],
-            'labels' => $labels,
-        ];
+        case 'year':
+        default:
+            $start = $now->copy()->startOfYear();
+            $end   = $now->copy()->endOfYear();
+            $granularity = 'perMonth';
+            break;
     }
+
+    $trend = Trend::model(ArsipSurat::class)
+        ->between(start: $start, end: $end);
+
+    if ($granularity === 'perMonth') {
+        $trend = $trend->perMonth();
+    } else {
+        $trend = $trend->perDay();
+    }
+
+    $data = $trend->count();
+
+    // values tetap sama
+    $values = $data->map(fn(TrendValue $value) => $value->aggregate)->toArray();
+
+    // labels menyesuaikan
+    if ($this->filter === 'year') {
+        // format ke nama bulan (contoh: Januari, Februari, dst)
+        $labels = $data->map(fn(TrendValue $value) => Carbon::parse($value->date)->translatedFormat('F'))->toArray();
+    } else {
+        // default pakai tanggal mentah
+        $labels = $data->map(fn(TrendValue $value) => $value->date)->toArray();
+    }
+
+    return [
+        'datasets' => [
+            [
+                'data' => $values,
+                'label' => 'Arsip Surat Count',
+                'borderColor' => '#3490dc',
+                'backgroundColor' => 'rgba(52, 144, 220, 0.1)',
+                'fill' => true,
+                'tension' => 0.3,
+            ],
+        ],
+        'labels' => $labels,
+    ];
+}
 
     // Get chart type (Line Chart)
     protected function getType(): string
