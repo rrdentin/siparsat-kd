@@ -30,7 +30,7 @@ public function mount(): void
     {
         parent::mount();
 
-        if (app()->environment('local')) {
+        if (app()->environment('production')) {
             $this->form->fill([
                 'email' => 'admin@siparsatkd.com',
                 'password' => 'password',
