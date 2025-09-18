@@ -7,6 +7,7 @@ use Filament\PanelProvider;
 use Filament\Pages\Dashboard;
 use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
+use App\Filament\Pages\Auth\LoginCustom;
 use Filament\Widgets\FilamentInfoWidget;
 use App\Filament\Widgets\ArsipSuratWidget;
 use Filament\Http\Middleware\Authenticate;
@@ -31,7 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('/')
-            ->login()
+            ->login(action: LoginCustom::class)
             ->colors([
                 'primary' => Color::Amber,
             ])
