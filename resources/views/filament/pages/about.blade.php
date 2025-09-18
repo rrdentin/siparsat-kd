@@ -49,6 +49,7 @@
         padding: 2rem !important;
         border-radius: 20px !important;
     }
+
     .badge {
         display: inline-flex;
         align-items: center;
@@ -285,6 +286,17 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+        .benefits-section {
+            display: none;
+            /* Hide the entire benefits section on mobile */
+        }
+
+        .scenario-section{
+            display: none;
+        }
     }
 
     .benefit-item {
@@ -625,7 +637,8 @@
                     <h3>Halaman About</h3>
                     <p>Informasi lengkap tentang developer dan website untuk transparansi dan dokumentasi yang
                         komprehensif.</p>
-                    <span class="badge badge-gray"> <x-heroicon-m-document style="width: 1rem; height:1rem; color:#edab39" />
+                    <span class="badge badge-gray"> <x-heroicon-m-document
+                            style="width: 1rem; height:1rem; color:#edab39" />
                         Documentation</span>
                 </div>
                 <div class="feature-card">
@@ -646,7 +659,8 @@
                     <h3>Manajemen Pengguna (Additional)</h3>
                     <p>Sistem pengelolaan pengguna lengkap dengan fitur Create, Read, Update, Delete serta fitur
                         pencarian.</p>
-                    <span class="badge badge-primary"><x-heroicon-m-user style="width: 1rem; height:1rem; color:#edab39" /> User
+                    <span class="badge badge-primary"><x-heroicon-m-user
+                            style="width: 1rem; height:1rem; color:#edab39" /> User
                         Management</span>
                 </div>
 
