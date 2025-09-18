@@ -1,5 +1,4 @@
 <style>
-    /* Layout: image left, table right on md+, stacked on small screens */
     .about-grid {
         display: grid !important;
         grid-template-columns: 1fr !important;
@@ -50,9 +49,6 @@
         padding: 2rem !important;
         border-radius: 20px !important;
     }
-</style>
-<style>
-    /* Badge styling */
     .badge {
         display: inline-flex;
         align-items: center;
