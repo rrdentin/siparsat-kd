@@ -68,7 +68,7 @@ surat dengan aman.
    ![Halaman About](screenshots/AboutPage.png)
 4. Halaman Dashboard (Additional)
    ![Halaman Dashboard](screenshots/DashboardPage.png)
-5. Halaman Manajemen Pengguna
+5. Halaman Manajemen Pengguna (Additional)
    ![Halaman Manajemen Pengguna](screenshots/ManajemenPenggunaPage.png)
 
 
